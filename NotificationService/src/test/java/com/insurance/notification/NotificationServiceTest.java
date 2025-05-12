@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
 
-public class NotificationServiceTest {
+class NotificationServiceTest {
 
     @InjectMocks
     private NotificationServiceImpl service;

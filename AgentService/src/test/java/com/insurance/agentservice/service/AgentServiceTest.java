@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AgentServiceTest {
+ class AgentServiceTest {
 
     @Mock
     private AgentRepository agentRepository;
@@ -26,7 +26,7 @@ public class AgentServiceTest {
     private Agent agent;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
         agent = new Agent();
         agent.setAgentId(1L);
@@ -36,7 +36,7 @@ public class AgentServiceTest {
     }
 
     @Test
-    public void testCreateAgent() {
+    void testCreateAgent() {
         when(agentRepository.save(agent)).thenReturn(agent);
         Agent createdAgent = agentService.createAgent(agent);
         assertNotNull(createdAgent);
@@ -44,7 +44,7 @@ public class AgentServiceTest {
     }
 
     @Test
-    public void testGetAgentById() {
+    void testGetAgentById() {
         when(agentRepository.findById(1L)).thenReturn(java.util.Optional.of(agent));
         Agent fetchedAgent = agentService.getAgentById(1L);
         assertNotNull(fetchedAgent);
@@ -52,7 +52,7 @@ public class AgentServiceTest {
     }
 
     @Test
-    public void testGetAllAgents() {
+    void testGetAllAgents() {
         when(agentRepository.findAll()).thenReturn(List.of(agent));
         List<Agent> agents = agentService.getAllAgents();
         assertNotNull(agents);
@@ -60,7 +60,7 @@ public class AgentServiceTest {
     }
 
     @Test
-    public void testUpdateAgent() {
+    void testUpdateAgent() {
         when(agentRepository.findById(1L)).thenReturn(java.util.Optional.of(agent));
         agent.setAgentName("Jane Doe");
         when(agentRepository.save(agent)).thenReturn(agent);
@@ -70,7 +70,7 @@ public class AgentServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         // Clean up resources after each test
     }
 }

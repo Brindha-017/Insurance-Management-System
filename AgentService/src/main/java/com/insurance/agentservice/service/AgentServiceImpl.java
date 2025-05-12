@@ -1,6 +1,6 @@
 package com.insurance.agentservice.service;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j; 
 import org.springframework.stereotype.Service;
 
 import com.insurance.agentservice.exception.AgentNotFoundException;
@@ -11,9 +11,10 @@ import java.util.List;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class AgentServiceImpl implements AgentService {
 
-    @Autowired
+   
     private AgentRepository agentRepository;
 
     // Create an agent

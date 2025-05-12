@@ -1,8 +1,6 @@
 package com.insurance.policyservice.dto;
 
-import lombok.*;
-import com.insurance.policyservice.dto.AddressDTO;
-
+import lombok.*; 
 import jakarta.persistence.Embedded;
 
 @Data
