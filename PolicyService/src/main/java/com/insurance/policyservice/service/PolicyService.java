@@ -14,5 +14,4 @@ public interface PolicyService {
 	String deletePolicy(Long id);
 	CustomerDTO getCustomerByPolicyId(Long id);
 	AgentDTO getAgentByPolicyId(Long id);
-	List<Policy> getPoliciesByAgentId(Long agentId);
 }

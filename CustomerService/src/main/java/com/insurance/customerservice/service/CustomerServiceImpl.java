@@ -1,12 +1,17 @@
 package com.insurance.customerservice.service;
 
 import com.insurance.customerservice.dto.CustomerDTO;
+import com.insurance.customerservice.dto.PolicyDTO;
 import com.insurance.customerservice.exception.ResourceNotFoundException;
+import com.insurance.customerservice.feignClient.PolicyClient;
 import com.insurance.customerservice.model.Customer;
 import com.insurance.customerservice.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +25,9 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    
+    @Autowired
+    private PolicyClient policyClient;
 
     @Override
     public CustomerDTO saveCustomer(CustomerDTO dto) {
@@ -81,4 +89,6 @@ public class CustomerServiceImpl implements CustomerService {
                 .address(customer.getAddress())
                 .build();
     }
+
+	
 }

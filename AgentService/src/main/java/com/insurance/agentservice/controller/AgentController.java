@@ -49,7 +49,7 @@ public class AgentController {
     // Get all agents
     @GetMapping("/getAllAgents")
     public List<Agent> getAllAgents() {
-    	log.info("API: Update All Agents");
+    	log.info("API: Get All Agents");
         return agentService.getAllAgents();
     }
 

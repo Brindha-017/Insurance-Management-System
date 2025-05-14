@@ -1,19 +1,21 @@
 package com.insurance.policyservice.service;
 
-import com.insurance.policyservice.feignClient.AgentClient;
-import com.insurance.policyservice.feignClient.CustomerClient;
-import com.insurance.policyservice.dto.AgentDTO;
-import com.insurance.policyservice.dto.CustomerDTO;
-import com.insurance.policyservice.exception.PolicyNotFoundException;
-import com.insurance.policyservice.model.Policy;
-import com.insurance.policyservice.repository.PolicyRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.insurance.policyservice.dto.AgentDTO;
+import com.insurance.policyservice.dto.CustomerDTO;
+import com.insurance.policyservice.exception.AgentNotFoundException;
+import com.insurance.policyservice.exception.CustomerNotFoundException;
+import com.insurance.policyservice.exception.PolicyNotFoundException;
+import com.insurance.policyservice.feignClient.AgentClient;
+import com.insurance.policyservice.feignClient.CustomerClient;
+import com.insurance.policyservice.model.Policy;
+import com.insurance.policyservice.repository.PolicyRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -27,6 +29,22 @@ public class PolicyServiceImpl implements PolicyService {
     // Add a new policy
     public Policy addPolicy(Policy policy) {
         log.info("Adding policy: {}", policy);
+        //Validate Customer
+        try {
+			customerClient.getCustomerById(policy.getCustomerId());
+		} catch (Exception e) {
+			log.error("Invalid Customer ID: {}", policy.getCustomerId(), e);
+			throw new CustomerNotFoundException("Invalid Customer ID: " + policy.getCustomerId());
+		}
+ 
+		// Validate agent
+        try {
+			agentClient.getAgentById(policy.getAgentId());
+		} catch (Exception e) {
+			log.error("Invalid Agent ID: {}", policy.getAgentId(), e);
+			throw new AgentNotFoundException("Invalid Agent ID: " + policy.getAgentId());
+		}
+
         return repository.save(policy);
     }
 
@@ -78,9 +96,5 @@ public class PolicyServiceImpl implements PolicyService {
         return agentClient.getAgentById(policy.getAgentId());
     }
 
-    // Get all policies by agent
-    public List<Policy> getPoliciesByAgentId(Long agentId) {
-        log.info("Fetching policies for agent ID: {}", agentId);
-        return repository.findByAgentId(agentId);
-    }
+   
 }

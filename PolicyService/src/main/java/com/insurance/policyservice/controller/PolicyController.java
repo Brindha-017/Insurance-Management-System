@@ -51,8 +51,5 @@ public class PolicyController {
         return service.getAgentByPolicyId(id);
     }
 
-    @GetMapping("/getPoliciesByAgentId/{agentId}")
-    public List<Policy> getPoliciesByAgentId(@PathVariable Long agentId) {
-        return service.getPoliciesByAgentId(agentId);
-    }
+    
 }

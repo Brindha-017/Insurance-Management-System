@@ -1,6 +1,7 @@
 package com.insurance.customerservice.controller;
 
 import com.insurance.customerservice.dto.CustomerDTO;
+import com.insurance.customerservice.dto.PolicyDTO;
 import com.insurance.customerservice.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,8 @@ public class CustomerController {
     public List<CustomerDTO> getAllCustomers() {
         return customerService.getAllCustomers();
     }
+    
+    
 
     @PutMapping("/updateCustomer/{id}")
     public CustomerDTO updateCustomer(@PathVariable Long id, @Valid @RequestBody CustomerDTO customerDTO) {

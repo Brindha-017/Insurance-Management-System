@@ -60,11 +60,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
 	private boolean isAuthorized(String role, String path, String method) {
 		if ("ADMIN".equalsIgnoreCase(role)) {
-			return (path.startsWith("/customers") || path.startsWith("/agents") || path.startsWith("/policy")) && method.equalsIgnoreCase("GET")
-					&& method.equalsIgnoreCase("PUT") && method.equalsIgnoreCase("POST") && method.equalsIgnoreCase("DELETE");
+			return (path.startsWith("/customers") || path.startsWith("/claims")||path.startsWith("/agents") || path.startsWith("/policy"));
 		} else if ("CUSTOMER".equalsIgnoreCase(role)) {
-			return (path.startsWith("/customers") || path.startsWith("/claims") && method.equalsIgnoreCase("GET")
-					&& method.equalsIgnoreCase("PUT") && method.equalsIgnoreCase("POST"));
+			return (path.startsWith("/customers") || path.startsWith("/claims") );
 		} else if ("AGENT".equalsIgnoreCase(role)) {
 			return (path.startsWith("/policy")
 					|| path.startsWith("/claims") && method.equalsIgnoreCase("GET") && method.equalsIgnoreCase("PUT")

@@ -1,6 +1,7 @@
 package com.insurance.notification.service;
 
 import com.insurance.notification.model.Notification;
+import com.insurance.notification.dto.PolicyDTO;
 import com.insurance.notification.feignClient.PolicyClient;
 import com.insurance.notification.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +21,14 @@ public class NotificationServiceImpl implements NotificationService {
 
 	// Notify about policy validity
 	public String notify(Long policyId) throws Exception {
-		var policy = policyClient.getPolicyById(policyId);
+		PolicyDTO policy = policyClient.getPolicyById(policyId);
 		if (policy == null)
 			throw new Exception("Policy not found");
 
 		Notification notification = new Notification();
 		notification.setPolicyId(policy.getPolicyId());
 		notification.setCustomerId(policy.getCustomerId());
-		notification.setMessage("Your policy '" + policy.getPolicyName() + "' is valid till " + policy.getValidTill());
+		notification.setMessage("Your policy '" + policy.getPolicyName() + "' is valid till " + policy.getValidityPeriod());
 		notification.setDate(LocalDate.now().toString());
 
 		repository.save(notification);

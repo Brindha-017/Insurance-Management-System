@@ -40,7 +40,7 @@ class NotificationServiceTest {
         PolicyDTO policy = new PolicyDTO();
         policy.setPolicyId(1L);
         policy.setPolicyName("Life Cover");
-        policy.setValidTill("2025-12-31");
+        policy.setValidityPeriod("2025-12-31");
         policy.setCustomerId(101L);
 
         when(policyClient.getPolicyById(1L)).thenReturn(policy);

@@ -1,6 +1,7 @@
 package com.insurance.customerservice.service;
 
 import com.insurance.customerservice.dto.CustomerDTO;
+import com.insurance.customerservice.dto.PolicyDTO;
 
 import java.util.List;
 
@@ -14,8 +15,10 @@ public interface CustomerService {
     CustomerDTO getCustomerById(Long id);
 
     List<CustomerDTO> getAllCustomers();
-
+    
     CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO);
 
     void deleteCustomer(Long id);
+
+	
 }
