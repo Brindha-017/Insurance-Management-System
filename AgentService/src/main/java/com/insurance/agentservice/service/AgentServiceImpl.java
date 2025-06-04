@@ -32,7 +32,7 @@ public class AgentServiceImpl implements AgentService {
                 .orElseThrow(() -> new AgentNotFoundException("Agent not found with ID: " + agentId));
         existingAgent.setAgentName(agent.getAgentName());
         existingAgent.setContactInfo(agent.getContactInfo());
-        existingAgent.setAssignedPolicyIds(agent.getAssignedPolicyIds());
+        existingAgent.setAssignPolicyId(agent.getAssignPolicyId());
         return agentRepository.save(existingAgent);
     }
 
@@ -55,7 +55,7 @@ public class AgentServiceImpl implements AgentService {
     @Override
     public List<Agent> getAgentsByPolicyId(Long policyId) {
         log.info("Fetching agents with policy ID: {}", policyId);
-        return agentRepository.findByAssignedPolicyIdsContains(policyId);
+        return agentRepository.findByAssignPolicyId(policyId);
     }
     
     //Delete agents by agent id

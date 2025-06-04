@@ -5,12 +5,16 @@ import com.insurance.policyservice.dto.CustomerDTO;
 import com.insurance.policyservice.model.Policy;
 import com.insurance.policyservice.service.PolicyService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/policy")
+@CrossOrigin("*")
 @RequiredArgsConstructor
 public class PolicyController {
 
@@ -41,15 +45,11 @@ public class PolicyController {
         return service.deletePolicy(id);
     }
 
-    @GetMapping("/getCustomerByPolicyId/{id}")
-    public CustomerDTO getCustomerByPolicyId(@PathVariable Long id) {
-        return service.getCustomerByPolicyId(id);
-    }
-
     @GetMapping("/getAgentByPolicyId/{id}")
     public AgentDTO getAgentByPolicyId(@PathVariable Long id) {
         return service.getAgentByPolicyId(id);
     }
-
+    
+  
     
 }

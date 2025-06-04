@@ -1,10 +1,11 @@
 package com.insurance.customerservice.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 /**
- * Customer entity for storing customer details.
+ * Customer for storing customer details.
  */
 @Entity
 @Data
@@ -23,5 +24,16 @@ public class Customer {
 
     private String phone; 
    
-    private Address address;
-}
+    @NotBlank(message = "Street Name is required")
+	private String street;
+	@NotBlank(message = "State Name is required")
+	private String state;
+	@NotBlank(message = "City Name is required")
+	private String city;
+	@NotBlank(message = "Postal Code is required")
+	private String postalcode;
+	
+	private Long assignedPolicyId;
+	
+	
+	}

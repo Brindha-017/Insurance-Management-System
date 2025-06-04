@@ -1,11 +1,17 @@
 package com.insurance.customerservice.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 import jakarta.validation.ConstraintViolationException;
 
 @RestControllerAdvice
@@ -72,4 +78,13 @@ public class GlobalExceptionHandler {
 
 	}
 
+	@ExceptionHandler(PolicyNotFoundException.class)
+	public ResponseEntity<String> handlePolicyNotFound(PolicyNotFoundException ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<String> handleGeneralError(RuntimeException ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+	}
 }

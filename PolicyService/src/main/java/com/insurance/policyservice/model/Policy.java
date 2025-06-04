@@ -31,11 +31,13 @@ public class Policy {
 	private String policyType;
 	@NotNull(message = "Enter the premium amount")
 	private Double premiumAmount;
+	@NotNull(message = "Enter the premium amount")
+	private Double coverageAmount;
 	@NotBlank(message = "Coverage Details shold be mentioned")
 	private String coverageDetails;
 
 	private LocalDate validityPeriod;
 
-	private Long customerId;
+	//private Long customerId;
 	private Long agentId;
 }

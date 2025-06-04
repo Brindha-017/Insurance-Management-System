@@ -18,6 +18,5 @@ public class Agent {
     @NotBlank(message="Contact info of the agent is required")
     private String contactInfo;
 
-    @ElementCollection
-    private List<Long> assignedPolicyIds; // List of policy IDs assigned to this agent
+    private Long assignPolicyId; // List of policy IDs assigned to this agent
 }

@@ -8,4 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class PolicyDTO {
     private Long policyId;
     private Double premiumAmount;
+    private Double coverageAmount;
 }

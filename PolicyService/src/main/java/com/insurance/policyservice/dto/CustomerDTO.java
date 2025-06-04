@@ -14,4 +14,6 @@ public class CustomerDTO {
     private String email;
     @Embedded
     private AddressDTO address;
+    
+    private Long assignedPolicyId;
 }

@@ -92,7 +92,7 @@ public class ClaimServiceImpl implements ClaimService {
         PolicyDTO policy = policyClient.getPolicyById(claim.getPolicyId());
 
         String finalStatus;
-        if (claim.getClaimAmount() >= policy.getPremiumAmount()) {
+        if (claim.getClaimAmount() >= policy.getPremiumAmount()&&claim.getClaimAmount()<=policy.getCoverageAmount()) {
             finalStatus = "APPROVED";
         } else {
             finalStatus = "REJECTED";

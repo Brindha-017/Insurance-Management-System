@@ -35,7 +35,16 @@ public class CustomerDTO {
     @NotBlank(message = "Phone number is required")
     private String phone;
     
-    private Address address;
+    @NotBlank(message = "Street Name is required")
+	private String street;
+	@NotBlank(message = "State Name is required")
+	private String state;
+	@NotBlank(message = "City Name is required")
+	private String city;
+	@NotBlank(message = "Postal Code is required")
+	private String postalcode;
+	
+	private Long assignedPolicyId;
   
 }
 

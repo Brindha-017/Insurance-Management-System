@@ -10,5 +10,5 @@ import java.util.List;
 public interface AgentRepository extends JpaRepository<Agent, Long> {
 
     // Custom query method to find agents by their assigned policy ID
-    List<Agent> findByAssignedPolicyIdsContains(Long policyId);
+    List<Agent> findByAssignPolicyId(Long policyId);
 }

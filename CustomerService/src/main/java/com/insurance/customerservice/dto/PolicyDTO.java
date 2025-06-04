@@ -6,14 +6,12 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class PolicyDTO {
-	
+
 	private Long policyId;
-	
 	private String policyName;
-
 	private String policyType;
-
-	private Double premiumAmount;
-
+	private double premiumAmount;
+	private double coverageAmount;
 	private String coverageDetails;
+	private String validityPeriod;
 }

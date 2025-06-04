@@ -24,5 +24,7 @@ public class Claim {
     private Long customerId;
     @NotNull(message = "Enter the claim amount")
     private double claimAmount;
+    @NotBlank(message="Need to fill the claim reason")
+    private String claimReason; 
     private String status; // filed, under_review, approved, rejected
 }

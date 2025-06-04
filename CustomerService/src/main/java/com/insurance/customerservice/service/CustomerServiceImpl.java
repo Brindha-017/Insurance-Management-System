@@ -1,7 +1,8 @@
 package com.insurance.customerservice.service;
 
-import com.insurance.customerservice.dto.CustomerDTO;
+import com.insurance.customerservice.dto.CustomerDTO; 
 import com.insurance.customerservice.dto.PolicyDTO;
+import com.insurance.customerservice.exception.PolicyNotFoundException;
 import com.insurance.customerservice.exception.ResourceNotFoundException;
 import com.insurance.customerservice.feignClient.PolicyClient;
 import com.insurance.customerservice.model.Customer;
@@ -35,7 +36,10 @@ public class CustomerServiceImpl implements CustomerService {
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .phone(dto.getPhone())
-                .address(dto.getAddress())
+                .street(dto.getStreet())
+                .state(dto.getState())
+                .city(dto.getCity())
+                .postalcode(dto.getPostalcode())
                 .build();
         Customer saved = customerRepository.save(customer);
         log.info("Customer saved with ID: {}", saved.getCustomerId());
@@ -65,7 +69,12 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
         customer.setPhone(dto.getPhone());
-        customer.setAddress(dto.getAddress());
+        customer.setStreet(dto.getStreet());
+        customer.setState(dto.getState());
+        customer.setCity(dto.getCity());
+        customer.setPostalcode(dto.getPostalcode());
+        customer.setAssignedPolicyId(dto.getAssignedPolicyId());
+
 
         Customer updated = customerRepository.save(customer);
         log.info("Customer updated with ID: {}", id);
@@ -86,9 +95,43 @@ public class CustomerServiceImpl implements CustomerService {
                 .name(customer.getName())
                 .email(customer.getEmail())
                 .phone(customer.getPhone())
-                .address(customer.getAddress())
+                .street(customer.getStreet())
+                .state(customer.getState())
+                .city(customer.getCity())
+                .postalcode(customer.getPostalcode())
+                .assignedPolicyId(customer.getAssignedPolicyId())
                 .build();
     }
+    
+    @Override
+    public Customer assignPolicyToCustomer(Long customerId, Long policyId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found with ID: " + customerId));
+
+        try {
+            PolicyDTO policy = policyClient.getPolicyById(policyId);
+            if (policy == null || policy.getPolicyId() == null) {
+                throw new PolicyNotFoundException("Policy with ID " + policyId + " not found.");
+            }
+        } catch (Exception e) {
+            throw new PolicyNotFoundException("Policy service unavailable or policy not found.");
+        }
+
+        customer.setAssignedPolicyId(policyId);
+        return customerRepository.save(customer);
+    }
+
+	@Override
+	public List<Customer> getCustomersByPolicyId(Long policyId) {
+		List<Customer> customers = customerRepository.findByAssignedPolicyId(policyId);
+		 
+        if (customers.isEmpty()) {
+            throw new ResourceNotFoundException("No customers found for Policy ID: " + policyId);
+        }
+ 
+        return customers;
+    
+	}
 
 	
 }
