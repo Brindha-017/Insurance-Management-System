@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/policy")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RequiredArgsConstructor
 public class PolicyController {
 

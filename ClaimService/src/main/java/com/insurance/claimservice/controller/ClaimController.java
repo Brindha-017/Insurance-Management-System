@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/claims")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class ClaimController {
 
     private ClaimService claimService;
