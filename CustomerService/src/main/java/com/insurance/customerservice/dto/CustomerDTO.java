@@ -6,6 +6,9 @@ import org.springframework.validation.annotation.Validated;
 
 import com.insurance.customerservice.model.Address;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -23,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class CustomerDTO {
-
+	
     private Long customerId;
 
     @NotBlank(message = "Name is required")

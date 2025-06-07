@@ -1,5 +1,6 @@
 package com.insurance.customerservice.controller;
 
+
 import com.insurance.customerservice.dto.CustomerDTO; 
 import com.insurance.customerservice.dto.PolicyDTO;
 import com.insurance.customerservice.model.Customer;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for Customer operations.
@@ -52,7 +54,6 @@ public class CustomerController {
         return "Customer deleted successfully.";
     }
     
-    
     @PutMapping("/{customerId}/assignPolicy/{policyId}")
     public ResponseEntity<Customer> assignPolicyToCustomer(
             @PathVariable Long customerId,
@@ -66,4 +67,14 @@ public class CustomerController {
     public List<Customer> customersByPolicyId(@PathVariable Long policyId){
     	return customerService.getCustomersByPolicyId(policyId);
     }
+    
+    @GetMapping("/getPolicy/{customerId}")
+    public PolicyDTO getPolicy(@PathVariable Long customerId) {
+    	return customerService.getPolicyOfCustomer(customerId);
+    }
+    @GetMapping("/findByEmail/{email}")
+    public Optional<Customer> getCustomerByEmail(@PathVariable String email) {
+        return customerService.findCustomerByEmail(email);
+    }
+     
 }

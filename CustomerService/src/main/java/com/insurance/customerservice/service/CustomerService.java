@@ -5,6 +5,7 @@ import com.insurance.customerservice.dto.PolicyDTO;
 import com.insurance.customerservice.model.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface for Customer service with method declarations.
@@ -22,8 +23,12 @@ public interface CustomerService {
     void deleteCustomer(Long id);
     
     Customer assignPolicyToCustomer(Long customerId, Long policyId);
+    
+    PolicyDTO getPolicyOfCustomer(Long customerId);
 
 	List<Customer> getCustomersByPolicyId(Long policyId);
+
+	Optional<Customer> findCustomerByEmail(String email);
 
 	
 }

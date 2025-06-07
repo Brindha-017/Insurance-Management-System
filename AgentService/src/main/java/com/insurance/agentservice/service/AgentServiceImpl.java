@@ -8,6 +8,7 @@ import com.insurance.agentservice.model.Agent;
 import com.insurance.agentservice.repository.AgentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -64,5 +65,11 @@ public class AgentServiceImpl implements AgentService {
     	Agent agent =agentRepository.findById(id).orElseThrow(()-> new AgentNotFoundException("Agent not found with ID: "+id));
     	log.info("Deleting agent with ID: {}",id);
     	agentRepository.delete(agent);
+    }
+
+
+    @Override
+    public Optional<Agent> findAgentByEmail(String email) {
+        return agentRepository.findByEmail(email);
     }
 }

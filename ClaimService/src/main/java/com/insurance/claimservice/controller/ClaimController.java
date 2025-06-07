@@ -64,4 +64,9 @@ public class ClaimController {
     public String trackStatus(@PathVariable Long id) {
         return claimService.trackClaimStatus(id);
     }
+    
+    @GetMapping("/getClaimofCustomer/{customerId}")
+    public List<Claim> getClaimofCustomer(@PathVariable Long customerId) {
+    	return claimService.getClaimofCustomer(customerId);
+    }
 }

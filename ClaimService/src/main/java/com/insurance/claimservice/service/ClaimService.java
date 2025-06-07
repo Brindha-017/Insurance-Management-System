@@ -19,4 +19,6 @@ public interface ClaimService {
 	String trackClaimStatus(Long claimId);
 
 	Claim fileClaim(@Valid Claim claim);
+	
+	List<Claim> getClaimofCustomer(Long customerId);
 }

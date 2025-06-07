@@ -1,5 +1,6 @@
 package com.insurance.customerservice.service;
 
+
 import com.insurance.customerservice.dto.CustomerDTO; 
 import com.insurance.customerservice.dto.PolicyDTO;
 import com.insurance.customerservice.exception.PolicyNotFoundException;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -132,6 +134,28 @@ public class CustomerServiceImpl implements CustomerService {
         return customers;
     
 	}
-
 	
+	@Override
+
+    public PolicyDTO getPolicyOfCustomer(Long customerId) {
+
+        Customer customer = customerRepository.findById(customerId)
+
+                .orElseThrow(() -> new RuntimeException("Customer not found with ID: " + customerId));
+     
+        if (customer.getAssignedPolicyId() == null) {
+
+            throw new RuntimeException("No policy assigned to this customer.");
+
+        }
+     
+        return policyClient.getPolicyById(customer.getAssignedPolicyId());
+
+    }
+
+	@Override
+    public Optional<Customer> findCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
 }

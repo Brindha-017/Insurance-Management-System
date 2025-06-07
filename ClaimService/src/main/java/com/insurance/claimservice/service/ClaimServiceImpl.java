@@ -105,4 +105,14 @@ public class ClaimServiceImpl implements ClaimService {
         return finalStatus;
     }
 
+	@Override
+	public List<Claim> getClaimofCustomer(Long customerId) {
+		List<Claim> claims = claimRepository.findByCustomerId(customerId);
+	    if (claims.isEmpty()) {
+	        log.warn("No claims found for customer ID: {}", customerId);
+	        throw new RuntimeException("No claims found for this customer");
+	    }
+	    log.info("Fetched {} claims for customer ID {}", claims.size(), customerId);
+	    return claims;
+	}
 }

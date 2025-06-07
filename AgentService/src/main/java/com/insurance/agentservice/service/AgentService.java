@@ -1,6 +1,7 @@
 package com.insurance.agentservice.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.insurance.agentservice.model.Agent;
 
@@ -16,4 +17,6 @@ public interface AgentService {
 	List<Agent> getAgentsByPolicyId(Long policyId);
 
 	void deleteAgent(Long id);
+	
+	Optional<Agent> findAgentByEmail(String email);
 }

@@ -1,8 +1,6 @@
 package com.insurance.policyservice.feignClient;
-import java.util.*;
-
+import java.util.*; 
 import com.insurance.policyservice.dto.CustomerDTO;
-
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;

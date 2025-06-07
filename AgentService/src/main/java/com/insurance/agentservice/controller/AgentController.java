@@ -1,8 +1,8 @@
 package com.insurance.agentservice.controller;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,6 +66,11 @@ public class AgentController {
     	log.info("API: Delete agent{}",id);
     	agentService.deleteAgent(id);
     	return "Agent with ID "+id+" deleted successfully"; 
+    }
+    
+    @GetMapping("/findByEmail/{email}")
+    public Optional<Agent> getCustomerByEmail(@PathVariable String email) {
+        return agentService.findAgentByEmail(email);
     }
 }
 
