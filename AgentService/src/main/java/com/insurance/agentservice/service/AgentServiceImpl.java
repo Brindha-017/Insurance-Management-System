@@ -33,6 +33,7 @@ public class AgentServiceImpl implements AgentService {
                 .orElseThrow(() -> new AgentNotFoundException("Agent not found with ID: " + agentId));
         existingAgent.setAgentName(agent.getAgentName());
         existingAgent.setContactInfo(agent.getContactInfo());
+        existingAgent.setEmail(agent.getEmail());
         existingAgent.setAssignPolicyId(agent.getAssignPolicyId());
         return agentRepository.save(existingAgent);
     }

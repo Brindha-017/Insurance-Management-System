@@ -21,4 +21,6 @@ public interface ClaimService {
 	Claim fileClaim(@Valid Claim claim);
 	
 	List<Claim> getClaimofCustomer(Long customerId);
+
+	List<Claim> getClaimByPolicy(Long policyId);
 }

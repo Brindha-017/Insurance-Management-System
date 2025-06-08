@@ -69,4 +69,9 @@ public class ClaimController {
     public List<Claim> getClaimofCustomer(@PathVariable Long customerId) {
     	return claimService.getClaimofCustomer(customerId);
     }
+    
+    @GetMapping("/getClaimByPolicy/{policyId}")
+    public List<Claim> getClaimByPolicy(@PathVariable Long policyId){
+    	return claimService.getClaimByPolicy(policyId);
+    }
 }

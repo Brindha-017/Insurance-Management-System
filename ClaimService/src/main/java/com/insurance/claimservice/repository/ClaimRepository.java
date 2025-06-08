@@ -12,4 +12,6 @@ public interface ClaimRepository extends JpaRepository<Claim, Long> {
 	ClaimDTO save(ClaimDTO claim);
 	
 	List<Claim> findByCustomerId(Long customerId);
+
+	List<Claim> findByPolicyId(Long policyId);
 }

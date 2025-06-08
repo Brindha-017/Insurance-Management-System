@@ -115,4 +115,9 @@ public class ClaimServiceImpl implements ClaimService {
 	    log.info("Fetched {} claims for customer ID {}", claims.size(), customerId);
 	    return claims;
 	}
+
+	@Override
+	public List<Claim> getClaimByPolicy(Long policyId) {
+		return claimRepository.findByPolicyId(policyId);
+	}
 }
