@@ -63,7 +63,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 			return (path.startsWith("/customers") || path.startsWith("/claims")||path.startsWith("/agents")||path.startsWith("/notification") || path.startsWith("/policy"));
 		} else if ("CUSTOMER".equalsIgnoreCase(role)) {
 			return (path.startsWith("/customers") || path.startsWith("/claims") ||path.startsWith("/policy")||path.startsWith("/agents"));
-		} else if ("AGENT".equalsIgnoreCase(role)) {
+		} 
+		else if ("AGENT".equalsIgnoreCase(role)) {
 			return (path.startsWith("/policy")||path.startsWith("/customers")
 					|| path.startsWith("/claims")||path.startsWith("/agents"));
 		}
