@@ -32,14 +32,6 @@ public class PolicyServiceImpl implements PolicyService {
     // Add a new policy
     public Policy addPolicy(Policy policy) {
         log.info("Adding policy: {}", policy);
- 
-		// Validate agent
-        try {
-			agentClient.getAgentById(policy.getAgentId());
-		} catch (Exception e) {
-			log.error("Invalid Agent ID: {}", policy.getAgentId(), e);
-			throw new AgentNotFoundException("Invalid Agent ID: " + policy.getAgentId());
-		}
 
         return repository.save(policy);
     }
@@ -67,7 +59,6 @@ public class PolicyServiceImpl implements PolicyService {
         existing.setCoverageDetails(newPolicy.getCoverageDetails());
         existing.setCoverageAmount(newPolicy.getCoverageAmount());
         existing.setValidityPeriod(newPolicy.getValidityPeriod());
-        existing.setAgentId(newPolicy.getAgentId());
         return repository.save(existing);
     }
 
@@ -79,12 +70,7 @@ public class PolicyServiceImpl implements PolicyService {
     }
 
 
-    // Get agent assigned to a policy
-    public AgentDTO getAgentByPolicyId(Long id) {
-        Policy policy = getPolicyById(id);
-        log.info("Fetching agent with ID: {} for policy ID: {}", policy.getAgentId(), id);
-        return agentClient.getAgentById(policy.getAgentId());
-    }
+    
     
    
 }

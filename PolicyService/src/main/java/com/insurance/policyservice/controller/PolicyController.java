@@ -45,10 +45,7 @@ public class PolicyController {
         return service.deletePolicy(id);
     }
 
-    @GetMapping("/getAgentByPolicyId/{id}")
-    public AgentDTO getAgentByPolicyId(@PathVariable Long id) {
-        return service.getAgentByPolicyId(id);
-    }
+    
     
   
     

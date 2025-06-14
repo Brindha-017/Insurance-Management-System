@@ -1,15 +1,6 @@
 package com.insurance.customerservice.dto;
 
-import java.util.List;
 
-import org.springframework.validation.annotation.Validated;
-
-import com.insurance.customerservice.model.Address;
-
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

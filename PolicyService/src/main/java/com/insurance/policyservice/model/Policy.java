@@ -38,6 +38,4 @@ public class Policy {
 
 	private LocalDate validityPeriod;
 
-	//private Long customerId;
-	private Long agentId;
 }

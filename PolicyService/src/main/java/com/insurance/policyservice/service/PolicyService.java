@@ -12,5 +12,5 @@ public interface PolicyService {
 	Policy getPolicyById(Long id);
 	Policy updatePolicy(Long id, Policy newPolicy);
 	String deletePolicy(Long id);
-	AgentDTO getAgentByPolicyId(Long id);
+	
 }

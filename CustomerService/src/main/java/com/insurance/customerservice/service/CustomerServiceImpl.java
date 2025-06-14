@@ -1,23 +1,24 @@
 package com.insurance.customerservice.service;
 
 
-import com.insurance.customerservice.dto.CustomerDTO; 
-import com.insurance.customerservice.dto.PolicyDTO;
-import com.insurance.customerservice.exception.PolicyNotFoundException;
-import com.insurance.customerservice.exception.ResourceNotFoundException;
-import com.insurance.customerservice.feignClient.PolicyClient;
-import com.insurance.customerservice.model.Customer;
-import com.insurance.customerservice.repository.CustomerRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.insurance.customerservice.dto.CustomerDTO;
+import com.insurance.customerservice.dto.PolicyDTO;
+import com.insurance.customerservice.exception.PolicyNotFoundException;
+import com.insurance.customerservice.exception.ResourceNotFoundException;
+import com.insurance.customerservice.feignClient.MailClient;
+import com.insurance.customerservice.feignClient.PolicyClient;
+import com.insurance.customerservice.model.Customer;
+import com.insurance.customerservice.repository.CustomerRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Implementation of CustomerService interface.
@@ -31,6 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
     
     @Autowired
     private PolicyClient policyClient;
+    private final MailClient mailClient;
+    
+ 
 
     @Override
     public CustomerDTO saveCustomer(CustomerDTO dto) {
@@ -118,9 +122,20 @@ public class CustomerServiceImpl implements CustomerService {
         } catch (Exception e) {
             throw new PolicyNotFoundException("Policy service unavailable or policy not found.");
         }
+        PolicyDTO policy = policyClient.getPolicyById(policyId);
 
         customer.setAssignedPolicyId(policyId);
+        try {
+			String msg = "Policy Booked: " + policy.getPolicyName() + " for customer " + customer.getName();
+			mailClient.sendEmail(customer.getEmail(), "Policy Booking info", msg);
+			log.info("Email sent to {}", customer.getEmail());
+		} catch (Exception e) {
+			log.error("Email failed: {}", e.getMessage());
+		}
         return customerRepository.save(customer);
+        
+       
+        
     }
 
 	@Override
